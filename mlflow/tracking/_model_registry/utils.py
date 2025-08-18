@@ -7,6 +7,7 @@ from mlflow.store.model_registry.databricks_workspace_model_registry_rest_store 
 )
 from mlflow.store.model_registry.file_store import FileStore
 from mlflow.store.model_registry.rest_store import RestStore
+from mlflow.store.model_registry.tcc_store import TCCStore
 from mlflow.tracking._model_registry.registry import ModelRegistryStoreRegistry
 from mlflow.tracking._tracking_service.utils import (
     _resolve_tracking_uri,
@@ -169,6 +170,7 @@ def _get_store_registry():
     # "databricks-uc"
     _model_registry_store_registry.register(_DATABRICKS_UNITY_CATALOG_SCHEME, UcModelRegistryStore)
     _model_registry_store_registry.register(_OSS_UNITY_CATALOG_SCHEME, UnityCatalogOssStore)
+    _model_registry_store_registry.register("tcc", TCCStore)
 
     for scheme in ["http", "https"]:
         _model_registry_store_registry.register(scheme, _get_rest_store)
